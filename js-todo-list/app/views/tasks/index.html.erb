@@ -1,0 +1,43 @@
+<h1>My ToDo List Manager!</h1>
+
+<%= form_for @task do |f| %>
+  <%= f.text_field :description %>
+  <%= f.submit %>
+<% end %>
+
+<ol>
+  <% @tasks.each do |task| %>
+  <li>
+  <%= task.description %>
+  <% if task.placement != 0 %>
+  <%= link_to 'up', swap_task_path(task, direction: -1), method: :patch %>
+  <% end %>
+  
+  <% if task!= Task.last %>
+  <%= link_to 'down', swap_task_path(task, direction: 1), method: :patch %>
+  <% end %>
+  </li>
+</ol>
+
+<!-- <table>
+  <thead>
+    <tr>
+      <th>Completed?</th>
+      <th>Description</th>
+      <th>Placement</th>
+      <th>Delete</th>
+    </tr>
+  </thead>
+  <tbody>
+    <ol>
+      <% @tasks.each do |task| %>
+    <tr>
+      <td><%= task.completed %></td>
+      <td><li><%= task.description %></li></td>
+      <td> <%= task.placement %> </td>
+      <td> Delete Icon </td>
+    </tr>
+    <% end %>
+  </ol>
+  </tbody>
+</table> -->
